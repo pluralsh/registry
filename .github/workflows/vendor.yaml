@@ -1,0 +1,49 @@
+name: Vendor and Push Images to GHCR
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  CONFIG_FILE: vendor.json
+  SCRIPT_FILE: vendor.sh
+
+jobs:
+  vendor-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      # Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Set up Docker Buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # Login to GitHub Container Registry
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y skopeo jq
+
+      # Make script executable
+      - name: Prepare script
+        run: chmod +x ${{ env.SCRIPT_FILE }}
+
+      # Run vendor script
+      - name: Vendor and push images
+        run: |
+          ./${{ env.SCRIPT_FILE }} "${{ env.CONFIG_FILE }}" "ghcr.io" "${{ github.repository }}"
