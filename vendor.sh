@@ -48,7 +48,7 @@ while IFS= read -r IMAGE; do
         while IFS= read -r TAG; do
             if [ -n "$TAG" ]; then
                 SOURCE="${IMAGE}:${TAG}"
-                TARGET="${TARGET_PREFIX}/${IMAGE//\//-}:${TAG}"
+                TARGET="${TARGET_PREFIX}/${IMAGE#*/}:${TAG}"
                 MAPPINGS="${MAPPINGS}${SOURCE}=${TARGET}"$'\n'
 
                 echo "Vendoring ${SOURCE} -> ${TARGET}"
