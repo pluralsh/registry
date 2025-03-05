@@ -1,6 +1,9 @@
 name: Vendor and Push Images to GHCR
 
 on:
+  push:
+    paths:
+      - vendor.json
   workflow_dispatch:
 
 env:
