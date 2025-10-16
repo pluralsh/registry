@@ -3,8 +3,8 @@
   "docker.io/bitnami/redis": "7\\.4\\.[0-9]+-debian-[0-9]+-r[0-9]+",
   "docker.io/kubernetesui/dashboard-api": "1\\.[0-9]+\\.[0-9]+",
   "docker.io/postgres": "1[4567]",
-  "docker.io/elasticsearch": "8\\.[0-9]+\\.[0-9]+",
-  "docker.io/opensearchproject/opensearch": "2\\.[0-9]+\\.[0-9]+",
+  "docker.io/elasticsearch": "8\\.11\\.[0-9]+",
+  "docker.io/opensearchproject/opensearch": "latest",
   "public.ecr.aws/localstack/localstack": "latest",
   "public.ecr.aws/aws-observability/aws-sigv4-proxy": "latest"
 }
