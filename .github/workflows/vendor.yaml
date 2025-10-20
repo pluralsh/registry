@@ -18,8 +18,8 @@ jobs:
         platforms:
           - platform: linux/amd64
             runner: ubuntu-24.04
-          - platform: linux/arm64
-            runner: ubuntu-24.04-arm
+          # - platform: linux/arm64
+          #   runner: ubuntu-24.04-arm
     runs-on: ${{ matrix.platforms.runner }}
     permissions:
       contents: read
