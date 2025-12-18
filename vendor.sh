@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -uo pipefail
 
 CONFIG_FILE="${1:-vendor.json}"
 REGISTRY="${2:-ghcr.io}"
@@ -106,6 +106,9 @@ if [ $FAILED_COUNT -gt 0 ]; then
     else
         echo "Warning: Some operations failed, but ${PROCESSED_COUNT} succeeded"
         # Don't exit with error if at least some succeeded
+        exit 0
     fi
 fi
 
+# Success
+exit 0
